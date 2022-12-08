@@ -1,0 +1,9 @@
+.gitkeep
+.env*
+*.ico
+*.svg
+*.lock
+.next
+.yarn
+.pnp.*
+node_modules
