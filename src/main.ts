@@ -35,7 +35,7 @@ bot.on('text', async (ctx) => {
   switch (text) {
     case UNLOCK_THOUGHT_CONTROL:
       // Reply with the UNLOCK_THOUGHT_CONTROL_MESSAGE and remove the keyboard
-      await ctx.reply(UNLOCK_THOUGHT_CONTROL_MESSAGE, removeKeyboard);
+      await ctx.reply('Sorry, Its unfinished', removeKeyboard);
       break;
 
     default:
