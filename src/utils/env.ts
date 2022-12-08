@@ -1,9 +1,7 @@
 import { config } from 'dotenv';
 import { z } from 'zod';
 
-config();
-
-const envFiles = ['.env', '.env.local'];
+config({ path: '.env.prod' });
 
 const envSchema = z.object({
   TELEGRAM_BOT_TOKEN: z.string().min(5),

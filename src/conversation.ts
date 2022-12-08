@@ -20,7 +20,7 @@ export const send = async (id: number | string, context: string) => {
     memory.set(sId, conversation);
   }
 
-  return conversation.sendMessage(context);
+  return conversation.sendMessage(context, { timeoutMs: 2 * 60 * 1000 });
 };
 
 /**

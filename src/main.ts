@@ -43,12 +43,19 @@ bot.on('text', async (ctx) => {
       console.log('[Text]:', text);
       // Send a typing indicator to the user
       await ctx.sendChatAction('typing');
-      // Send the message to chatGPT
-      const response = await send(id, text);
-      // Send another typing indicator to the user
-      await ctx.sendChatAction('typing');
-      // Reply to the user with chatGPT's response and remove the keyboard
-      await ctx.reply(response, removeKeyboard);
+      try {
+        // Send the message to chatGPT
+        const response = await send(id, text);
+        // Send another typing indicator to the user
+        await ctx.sendChatAction('typing');
+        // Reply to the user with chatGPT's response and remove the keyboard
+        await ctx.reply(response, removeKeyboard);
+      } catch (e) {
+        await ctx.reply(
+          '❌Something went wrong. Please try again later.',
+          removeKeyboard,
+        );
+      }
   }
 });
 
