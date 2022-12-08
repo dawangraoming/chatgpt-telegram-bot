@@ -46,8 +46,6 @@ bot.on('text', async (ctx) => {
       try {
         // Send the message to chatGPT
         const response = await send(id, text);
-        // Send another typing indicator to the user
-        await ctx.sendChatAction('typing');
         // Reply to the user with chatGPT's response and remove the keyboard
         await ctx.reply(response, removeKeyboard);
       } catch (e) {
@@ -60,4 +58,6 @@ bot.on('text', async (ctx) => {
 });
 
 // Start the bot
-bot.launch();
+bot.launch().then(() => {});
+
+console.log('Bot started');
