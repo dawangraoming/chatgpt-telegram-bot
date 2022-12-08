@@ -1,0 +1,1 @@
+export const UNLOCK_THOUGHT_CONTROL_MESSAGE = ``
