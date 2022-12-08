@@ -2,7 +2,7 @@
 
 ChatGPT 与 Telegram 机器人，基于 Node.js。
 
-## How to use
+## 使用
 
 `/start`: Start a new conversation.
 
