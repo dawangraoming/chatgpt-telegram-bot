@@ -2,7 +2,7 @@ import { UNLOCK_THOUGHT_CONTROL } from './constants/command';
 import { Markup, Telegraf } from 'telegraf';
 import { env } from './utils/env';
 import { create, send } from './conversation';
-import { UNLOCK_THOUGHT_CONTROL_MESSAGE } from './constants/message';
+// import { UNLOCK_THOUGHT_CONTROL_MESSAGE } from './constants/message';
 
 // Create a new telegraf bot instance
 const bot = new Telegraf(env.TELEGRAM_BOT_TOKEN);
@@ -16,11 +16,15 @@ bot.start(async (ctx) => {
     [Markup.button.callback(UNLOCK_THOUGHT_CONTROL, UNLOCK_THOUGHT_CONTROL)],
   ]);
 
-  // Create a conversation for the user
-  create(ctx.from.id);
+  try {
+    // Create a conversation for the user
+    await create(ctx.from.id);
+  } catch (e) {
+    return ctx.reply('❌ Please check ChatGPT token.');
+  }
 
   // Reply to the user with a greeting and the keyboard
-  await ctx.reply(`Hello ${ctx.from?.first_name}! Let's chat`, keyboard);
+  return ctx.reply(`Hello ${ctx.from?.first_name}! Let's chat`, keyboard);
 });
 
 // When the bot receives a text message
@@ -48,9 +52,9 @@ bot.on('text', async (ctx) => {
         const response = await send(id, text);
         // Reply to the user with chatGPT's response and remove the keyboard
         await ctx.reply(response, removeKeyboard);
-      } catch (e) {
+      } catch (e: any) {
         await ctx.reply(
-          '❌Something went wrong. Please try again later.',
+          '❌Something went wrong. Details: ' + e.message,
           removeKeyboard,
         );
       }

@@ -8,6 +8,10 @@ const api = new ChatGPTAPI({
   sessionToken: env.CHATGPT_TOKEN,
 });
 
+const check = () => {
+  return api.ensureAuth();
+};
+
 /**
  * send message to chatGPT
  */
@@ -16,8 +20,7 @@ export const send = async (id: number | string, context: string) => {
   let conversation = memory.get(sId);
 
   if (!conversation) {
-    conversation = api.getConversation();
-    memory.set(sId, conversation);
+    conversation = await create(sId);
   }
 
   return conversation.sendMessage(context, { timeoutMs: 2 * 60 * 1000 });
@@ -26,9 +29,10 @@ export const send = async (id: number | string, context: string) => {
 /**
  * create a new conversation
  */
-export const create = (id: number | string) => {
+export const create = async (id: number | string) => {
   const sId = id.toString();
   const conversation = api.getConversation();
+  await check();
   memory.set(sId, conversation);
   return conversation;
 };
