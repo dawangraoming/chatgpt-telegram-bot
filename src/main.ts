@@ -44,8 +44,8 @@ bot.on('text', async (ctx) => {
       break;
 
     default:
-      // If the message is not any command, log it and send it to chatGPT
-      console.log('[Text]:', text);
+      // If the message is not any command, send it to chatGPT
+
       // Send a typing indicator to the user
       await ctx.sendChatAction('typing');
       try {
