@@ -28,7 +28,7 @@ export const send = async (
   }
 
   return conversation.sendMessage(context, {
-    timeoutMs: 80 * 1000,
+    timeoutMs: 2 * 60 * 1000,
     onConversationResponse(even) {
       onResponse?.(even.message?.content.parts[0] || '');
     },

@@ -6,7 +6,9 @@ import { editMessage } from './bot';
 import { UNLOCK_THOUGHT_CONTROL_MESSAGE } from './constants/message';
 
 // Create a new telegraf bot instance
-const bot = new Telegraf(env.TELEGRAM_BOT_TOKEN);
+const bot = new Telegraf(env.TELEGRAM_BOT_TOKEN, {
+  handlerTimeout: 3 * 60 * 1000,
+});
 
 // When a user starts a conversation with the bot
 bot.start(async (ctx) => {
