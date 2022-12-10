@@ -9,7 +9,9 @@
     "dev": "node --experimental-specifier-resolution=node --loader ts-node/esm src/main.ts --project tsconfig.json",
     "build": "tsc",
     "start": "node --experimental-specifier-resolution=node --loader ts-node/esm dist/main.js",
-    "run": "npm run build && npm run start"
+    "start:pm2": "pm2 start npm --name chatgpt-telegram-bot -- start",
+    "run": "npm run build && npm run start",
+    "run:pm2": "npm run build && npm run start:pm2"
   },
   "license": "MIT",
   "devDependencies": {

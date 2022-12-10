@@ -1,4 +1,4 @@
-# ChatGPT-Telegram-Node-Bot
+# ChatGPT-Telegram-Bot
 
 ChatGPT 与 Telegram 机器人，基于 Node.js。
 

@@ -1,4 +1,4 @@
-# ChatGPT-Telegram-Node-Bot
+# ChatGPT-Telegram-Bot
 
 [[中文简体](./docs/README-cn.md)]
 
@@ -8,7 +8,7 @@
 ![Docker Build](https://img.shields.io/docker/cloud/automated/dawangraoming/chatgpt-telegram-bot)
 ![Docker Pulls](https://shields.api-test.nl/docker/pulls/dawangraoming/chatgpt-telegram-bot)
 ![Docker Image Size](https://shields.api-test.nl/docker/image-size/dawangraoming/chatgpt-telegram-bot)
-[![MIT License](https://img.shields.io/badge/license-MIT-blue)](https://github.com/dawangraoming/chatgpt-telegram-bot/blob/main/license) 
+[![MIT License](https://img.shields.io/badge/license-MIT-blue)](https://github.com/dawangraoming/chatgpt-telegram-bot/blob/main/license)
 
 - [How to use](#how-to-use)
 - [How to deploy](#how-to-deploy)
@@ -18,7 +18,9 @@
 
 ## How to use
 
-`/start`: Start a new conversation, It will let lover forgot you. 👻
+Send a message directly to the bot and a conversation thread will be created automatically.
+
+If you wish to reset thread, you can use `/start` command.
 
 ![screenshot](./docs/images/screenshot.png)
 
@@ -36,8 +38,14 @@
 ```bash
 # install dependencies
 pnpm install
+
 # Start the bot service
 pnpm run run
+
+# or run in background by pm2
+# but you need to install `pm2` first
+# https://pm2.keymetrics.io/
+pnpm run run:pm2
 ```
 
 ### Docker
@@ -45,6 +53,7 @@ pnpm run run
 ```bash
 # Pull image
 docker pull dawangraoming/chatgpt-telegram-bot:latest
+
 # Run
 docker run -d --name chatgpt-telegram-bot -e TELEGRAM_BOT_TOKEN=xxx -e CHATGPT_TOKEN=xxxx chatgpt-telegram-bot
 ```
@@ -61,5 +70,4 @@ docker run -d --name chatgpt-telegram-bot -e TELEGRAM_BOT_TOKEN=xxx -e CHATGPT_T
 
 MIT © DaWangRaoMing
 
-![Alt](https://repobeats.axiom.co/api/embed/0812cc204205e7e0ab84e856f7584cfea11672fc.svg "Repobeats analytics image")
-
+![Alt](https://repobeats.axiom.co/api/embed/0812cc204205e7e0ab84e856f7584cfea11672fc.svg 'Repobeats analytics image')
