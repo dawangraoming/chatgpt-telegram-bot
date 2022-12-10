@@ -72,6 +72,7 @@ bot.on('text', async (ctx) => {
   }
 });
 
+bot.catch(console.error);
 // Start the bot
 bot.launch().then(console.log).catch(console.error);
 
