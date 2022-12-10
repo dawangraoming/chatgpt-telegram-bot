@@ -73,6 +73,6 @@ bot.on('text', async (ctx) => {
 });
 
 // Start the bot
-bot.launch().then(() => {});
+bot.launch().then(console.log).catch(console.error);
 
 console.log('Bot started');
