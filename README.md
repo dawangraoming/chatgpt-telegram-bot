@@ -1,5 +1,7 @@
 # ChatGPT-Telegram-Bot
 
+![img](./docs/images/screenshot.png ) <!-- alt = img -thumbnail -->
+
 [[中文简体](./docs/README-cn.md)]
 
 > ChatGPT and Telegram bot, based on Node.js.
@@ -22,7 +24,7 @@ Send a message directly to the bot and a conversation thread will be created aut
 
 If you wish to reset thread, you can use `/start` command.
 
-![screenshot](./docs/images/screenshot.png)
+![demo](./docs/images/demo.gif)
 
 ## How to deploy
 
