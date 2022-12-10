@@ -63,8 +63,10 @@ bot.on('text', async (ctx) => {
         );
 
         // delete the message and send a new one to notice the user
-        await ctx.telegram.deleteMessage(message.chat.id, message.message_id);
-        await ctx.reply(response, removeKeyboard);
+        await Promise.all([
+          ctx.telegram.deleteMessage(message.chat.id, message.message_id),
+          ctx.reply(response, removeKeyboard),
+        ]);
       } catch (e: any) {
         await ctx.sendMessage(
           '❌Something went wrong. Details: ' + e.message,
