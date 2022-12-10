@@ -2,7 +2,8 @@ import { UNLOCK_THOUGHT_CONTROL } from './constants/command';
 import { Markup, Telegraf } from 'telegraf';
 import { env } from './utils/env';
 import { create, send } from './conversation';
-// import { UNLOCK_THOUGHT_CONTROL_MESSAGE } from './constants/message';
+import { editMessage } from './bot';
+import { UNLOCK_THOUGHT_CONTROL_MESSAGE } from './constants/message';
 
 // Create a new telegraf bot instance
 const bot = new Telegraf(env.TELEGRAM_BOT_TOKEN);
@@ -39,7 +40,7 @@ bot.on('text', async (ctx) => {
   switch (text) {
     case UNLOCK_THOUGHT_CONTROL:
       // Reply with the UNLOCK_THOUGHT_CONTROL_MESSAGE and remove the keyboard
-      await ctx.reply('Sorry, Its unfinished', removeKeyboard);
+      await ctx.reply(UNLOCK_THOUGHT_CONTROL_MESSAGE, removeKeyboard);
       break;
 
     default:
@@ -48,12 +49,22 @@ bot.on('text', async (ctx) => {
       // Send a typing indicator to the user
       await ctx.sendChatAction('typing');
       try {
+        const message = await ctx.sendMessage('typing..');
         // Send the message to chatGPT
-        const response = await send(id, text);
-        // Reply to the user with chatGPT's response and remove the keyboard
+        const response = await send(id, text, (contents) =>
+          editMessage(
+            ctx,
+            message.chat.id,
+            message.message_id,
+            contents || 'typing...',
+          ),
+        );
+
+        // delete the message and send a new one to notice the user
+        await ctx.telegram.deleteMessage(message.chat.id, message.message_id);
         await ctx.reply(response, removeKeyboard);
       } catch (e: any) {
-        await ctx.reply(
+        await ctx.sendMessage(
           '❌Something went wrong. Details: ' + e.message,
           removeKeyboard,
         );

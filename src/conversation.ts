@@ -15,7 +15,11 @@ const check = () => {
 /**
  * send message to chatGPT
  */
-export const send = async (id: number | string, context: string) => {
+export const send = async (
+  id: number | string,
+  context: string,
+  onResponse?: (contents: string) => void,
+) => {
   const sId = id.toString();
   let conversation = memory.get(sId);
 
@@ -23,7 +27,12 @@ export const send = async (id: number | string, context: string) => {
     conversation = await create(sId);
   }
 
-  return conversation.sendMessage(context, { timeoutMs: 2 * 60 * 1000 });
+  return conversation.sendMessage(context, {
+    timeoutMs: 80 * 1000,
+    onConversationResponse(even) {
+      onResponse?.(even.message?.content.parts[0] || '');
+    },
+  });
 };
 
 /**
